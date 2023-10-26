@@ -173,7 +173,7 @@ Config.Actions = {
         perms = "mod",
         dropdown = {
             { label = "Player",  option = "dropdown", data = "players" },
-            { label = "Confirm", option = "button",   type = "server", event = "ps-adminmenu:server:FreezePlayer" },
+            { label = "Confirm", option = "button",   type = "server", event = "ps-adminmenu:client:FreezePlayer" },
         },
     },
 
@@ -515,7 +515,7 @@ Config.Actions = {
         perms = "mod",
         dropdown = {
             { label = "Player",  option = "dropdown", data = "players" },
-            { label = "Confirm", option = "button",   type = "server", event = "ps-adminmenu:server:SpectateTarget" },
+            { label = "Confirm", option = "button",   type = "client", event = "ps-adminmenu::client:spectate" },
         },
     },
 
@@ -631,7 +631,6 @@ Config.Actions = {
         },
     },
 
-
     ["play_sound"] = {
         label = "Play Sound",
         perms = "mod",
@@ -647,6 +646,15 @@ Config.Actions = {
                 },
             },
             { label = "Play Sound", option = "button", type = "client", event = "ps-adminmenu:client:PlaySound" },
+        },
+    },
+
+    ["annoucement"] = {
+        label = "Server Annoucement",
+        perms = "mod",
+        dropdown = {
+            { label = "Message", option = "text" },
+            { label = "Confirm", option = "button", type = "client", event = "ps-adminmenu:client:sendAnnouncement" },
         },
     },
 }

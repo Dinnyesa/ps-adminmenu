@@ -8,19 +8,16 @@ RegisterNetEvent('ps-adminmenu:client:ToggleInvisible', function(data)
 end)
 
 -- God Mode
-local godmode = false
+local godMode = false
 RegisterNetEvent('ps-adminmenu:client:ToggleGodmode', function(data)
 	if not CheckPerms(data.perms) then return end
-	godmode = not godmode
 
-    if godmode then
-        QBCore.Functions.Notify(locale("godmode", "enabled"), 'primary')
-        while godmode do
-            Wait(0)
-            SetPlayerInvincible(cache.playerId, true)
-        end
-        SetPlayerInvincible(cache.playerId, false)
-        QBCore.Functions.Notify(locale("godmode", "disabled"), 'primary')
+    if not godMode then
+        TriggerEvent("txcl:setPlayerMode", "godmode", false)
+        godMode = true
+    else
+        TriggerEvent("txcl:setPlayerMode", "none", false)
+        godMode = false
     end
 end)
 
@@ -164,4 +161,11 @@ RegisterNetEvent("ps-adminmenu:client:setPed", function ( pedModels )
     SetPlayerModel(cache.playerId, pedModels)
     SetPedDefaultComponentVariation(cache.ped)
     SetModelAsNoLongerNeeded(pedModels)
+end)
+
+-- 
+
+RegisterNetEvent('ps-adminmenu:client:sendAnnouncement', function(data, selectedData)
+    local message = selectedData["Message"].value
+    TriggerServerEvent('txsv:req:sendAnnouncement', message)
 end)
